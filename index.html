@@ -419,6 +419,9 @@
     gap: 1px;
     background: rgba(245,242,236,0.06);
   }
+  .profile-body-3col {
+    grid-template-columns: repeat(3, 1fr);
+  }
   .profile-metric {
     background: #111;
     padding: 24px;
@@ -503,6 +506,12 @@
     color: var(--gold);
     padding: 0 12px;
     flex-shrink: 0;
+  }
+  .content-types-grid {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
   }
   /* ─── SLIDE 7: PRICING ─── */
   #s7 { background: var(--black); }
@@ -728,13 +737,308 @@
   .reveal-d2 { transition-delay: 0.2s; }
   .reveal-d3 { transition-delay: 0.3s; }
   .reveal-d4 { transition-delay: 0.4s; }
+
+  /* ─── HAMBURGER BUTTON ─── */
+  .nav-burger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 110;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .nav-burger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--white);
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+  .nav-burger.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav-burger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-burger.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* ─── MOBILE: 768px ─── */
+  @media (max-width: 768px) {
+    /* NAV */
+    nav { padding: 16px 20px; }
+    .nav-burger { display: flex; }
+    .nav-links {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(10,10,10,0.97);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 105;
+    }
+    .nav-links.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .nav-links a {
+      font-size: 16px;
+      color: var(--white);
+    }
+
+    /* SLIDES */
+    .slide {
+      padding: 100px 20px 60px;
+      min-height: auto;
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+    .slide-num {
+      right: 20px;
+      bottom: 20px;
+      font-size: 10px;
+    }
+
+    /* HERO */
+    .hero-badge {
+      font-size: 9px;
+      padding: 6px 14px;
+      margin-bottom: 24px;
+    }
+    .hero-title {
+      font-size: clamp(40px, 12vw, 72px);
+    }
+    .hero-subtitle-line {
+      font-size: clamp(11px, 3vw, 16px);
+      margin-bottom: 32px;
+    }
+    .hero-desc {
+      font-size: 15px;
+      margin-bottom: 40px;
+    }
+    .hero-stats {
+      gap: 28px;
+    }
+    .hero-stat-num {
+      font-size: 28px;
+    }
+    .hero-stat-label {
+      font-size: 10px;
+    }
+
+    /* SLIDE TITLE */
+    .slide-title {
+      font-size: clamp(26px, 7vw, 42px);
+      margin-bottom: 32px;
+    }
+
+    /* TWO-COL → STACK */
+    .two-col {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    /* STEPS → 2 COLUMNS */
+    .steps {
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 32px;
+    }
+    .step {
+      padding: 28px 20px;
+    }
+    .step-num {
+      font-size: 36px;
+    }
+    .step-arrow {
+      display: none;
+    }
+
+    /* SLOTS → STACK */
+    .slots-layout {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .slots-big-num {
+      font-size: 56px;
+    }
+    .slots-grid {
+      gap: 4px;
+    }
+
+    /* PROFILE MOCKUP */
+    .profile-mockup {
+      margin-top: 32px;
+    }
+    .profile-header {
+      padding: 16px 20px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .profile-avatar {
+      width: 44px; height: 44px;
+      font-size: 18px;
+    }
+    .profile-name {
+      font-size: 14px;
+    }
+    .profile-badge-slot {
+      font-size: 9px;
+      padding: 4px 10px;
+    }
+    .profile-body {
+      padding: 16px !important;
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+    .profile-metric {
+      padding: 16px;
+    }
+    .metric-val {
+      font-size: 20px !important;
+    }
+    .metric-label {
+      font-size: 10px;
+    }
+    .profile-progress {
+      padding: 16px 20px;
+    }
+
+    /* FLOW DIAGRAM → STACK */
+    .flow-diagram {
+      grid-template-columns: 1fr;
+      gap: 0;
+      margin-top: 32px;
+    }
+    .flow-arrow {
+      text-align: center;
+      padding: 12px 0;
+      transform: rotate(90deg);
+      font-size: 24px;
+    }
+    .flow-box {
+      padding: 28px 20px;
+    }
+
+    /* PRICING → STACK */
+    .pricing-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .pricing-card {
+      padding: 32px 24px;
+    }
+    .pricing-price {
+      font-size: 44px;
+    }
+
+    /* TIMER */
+    .timer-widget {
+      flex-direction: column;
+      gap: 12px;
+      padding: 16px 20px;
+      text-align: center;
+    }
+    .timer-digits {
+      font-size: 24px;
+    }
+
+    /* CTA */
+    .cta-title {
+      font-size: clamp(32px, 8vw, 56px);
+    }
+    .cta-sub {
+      font-size: 14px;
+      margin-bottom: 40px;
+    }
+    .cta-buttons {
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-primary, .btn-secondary {
+      width: 100%;
+      max-width: 320px;
+      padding: 16px 24px;
+      font-size: 12px;
+    }
+
+    /* S6 bottom grid → stack */
+    .content-types-grid {
+      grid-template-columns: 1fr;
+    }
+
+    /* SCARCITY ITEMS */
+    .scarcity-item {
+      gap: 14px;
+      padding: 18px 0;
+    }
+    .scarcity-icon {
+      width: 36px; height: 36px;
+      font-size: 16px;
+    }
+    .scarcity-item h4 {
+      font-size: 12px;
+    }
+    .scarcity-item p {
+      font-size: 12px;
+    }
+
+    /* SOLUTION CARD */
+    .solution-card {
+      padding: 28px 20px;
+    }
+    .solution-card h3 {
+      font-size: 16px;
+    }
+  }
+
+  /* ─── MOBILE: 480px (small phones) ─── */
+  @media (max-width: 480px) {
+    .hero-title {
+      font-size: clamp(36px, 14vw, 56px);
+    }
+    .hero-stats {
+      flex-direction: column;
+      gap: 20px;
+    }
+    .steps {
+      grid-template-columns: 1fr;
+    }
+    .profile-body {
+      grid-template-columns: 1fr !important;
+    }
+    .pricing-price {
+      font-size: 36px;
+    }
+    .pricing-price sup {
+      font-size: 18px;
+    }
+    .slots-big-num {
+      font-size: 44px;
+    }
+    .slots-grid {
+      gap: 3px;
+    }
+  }
 </style>
 </head>
 <body>
 <!-- NAV -->
 <nav>
   <div class="nav-logo">Content<span>.</span>ZVD</div>
-  <ul class="nav-links">
+  <button class="nav-burger" id="navBurger" aria-label="Меню">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
     <li><a href="#s2">Проблема</a></li>
     <li><a href="#s3">Как работает</a></li>
     <li><a href="#s4">Слоты</a></li>
@@ -884,7 +1188,7 @@
         </div>
         <div class="profile-badge-slot">МЕСТО #037</div>
       </div>
-      <div class="profile-body" style="grid-template-columns: repeat(3,1fr);">
+      <div class="profile-body profile-body-3col">
         <div class="profile-metric">
           <div class="metric-val">12 400</div>
           <div class="metric-label">Подписчиков на старте</div>
@@ -961,7 +1265,7 @@
         <p>Готовый контент в кабинете: Reels, посты, сторис — бери и публикуй</p>
       </div>
     </div>
-    <div style="margin-top:48px; display:grid; grid-template-columns: 1fr 1fr; gap: 24px;" class="reveal reveal-d3">
+    <div class="content-types-grid reveal reveal-d3">
       <div style="padding:28px; border:1px solid rgba(245,242,236,0.08); background:#111;">
         <div style="font-family:'Unbounded',sans-serif; font-size:12px; color:var(--gold); letter-spacing:0.1em; margin-bottom:16px;">ОТКРЫТЫЙ ПРОФИЛЬ</div>
         <p style="font-size:14px; color:var(--text-dim); line-height:1.6;">Другие участники видят твой прогресс — это дополнительная социальная мотивация и доказательство результатов системы.</p>
@@ -1043,6 +1347,27 @@
   <div class="slide-num">08 / 08</div>
 </section>
 <script>
+  // ALWAYS RESET TO FIRST SLIDE ON LOAD
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
+  if (window.location.hash) {
+    history.replaceState(null, '', window.location.pathname);
+  }
+
+  // HAMBURGER MENU
+  const burger = document.getElementById('navBurger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('active');
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      burger.classList.remove('active');
+      navLinks.classList.remove('open');
+    });
+  });
+
   // SCROLL REVEAL
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
