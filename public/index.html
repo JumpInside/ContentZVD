@@ -1309,6 +1309,26 @@
         }
         .ob-overlay.ob-hidden { display: none; }
 
+        .ob-skip {
+            position: absolute;
+            top: 18px;
+            right: 24px;
+            z-index: 3;
+            font-family: var(--ob-sans);
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--ob-text-dim);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px 4px;
+            transition: color 0.2s ease;
+            letter-spacing: 0.3px;
+        }
+        .ob-skip:hover { color: var(--ob-text); }
+        .ob-skip:active { color: var(--ob-text); }
+        .ob-skip.ob-skip-hidden { display: none; }
+
         .ob-glow {
             position: fixed;
             inset: 0;
@@ -1708,6 +1728,7 @@
     <!-- ════════════════════════════════════════════════ -->
     <div class="ob-overlay" id="onboarding">
         <div class="ob-glow"></div>
+        <button class="ob-skip" id="obSkip">Пропустить</button>
 
         <!-- Slide content area -->
         <div class="ob-slide-area" id="obSlideArea">
@@ -2179,6 +2200,7 @@
         var obAnimKey = 0;
         var obTouchStart = null;
         var obBtn = document.getElementById('obBtn');
+        var obSkip = document.getElementById('obSkip');
         var obSlideArea = document.getElementById('obSlideArea');
         var obDotEls = document.querySelectorAll('.ob-dot');
         var obBtnLabels = ['Начать \u2192', 'Дальше \u2192', 'Понятно \u2192', 'Войти в iWe \u2192'];
@@ -2204,6 +2226,9 @@
             obDotEls.forEach(function(d, i) {
                 d.classList.toggle('ob-dot-active', i === obCurrent);
             });
+
+            // Hide skip on last slide
+            obSkip.classList.toggle('ob-skip-hidden', obCurrent === 3);
         }
 
         function obNext() { obGoTo(obCurrent + 1); }
@@ -2224,6 +2249,11 @@
             } else {
                 obComplete();
             }
+        });
+
+        // Skip click
+        obSkip.addEventListener('click', function() {
+            obComplete();
         });
 
         // Dot clicks
