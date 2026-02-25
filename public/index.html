@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Content.ZVD — Занять место</title>
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;700;900&family=Onest:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;700;900&family=Onest:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --black: #0a0a0a;
@@ -1204,9 +1204,673 @@
             .sec { padding-left: 80px; padding-right: 80px; }
             .hero-title { font-size: 80px; }
         }
+        /* ════════════════════════════════════════════════ */
+        /* ONBOARDING                                      */
+        /* ════════════════════════════════════════════════ */
+        :root {
+            --ob-bg: #0a0a0c;
+            --ob-text: #f5f2ed;
+            --ob-text-dim: rgba(245, 242, 237, 0.42);
+            --ob-text-mid: rgba(245, 242, 237, 0.62);
+            --ob-serif: 'Cormorant Garamond', Georgia, serif;
+            --ob-sans: 'Nunito Sans', system-ui, sans-serif;
+            --ob-divider: rgba(255, 255, 255, 0.06);
+            --ob-divider-light: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Keyframes */
+        @keyframes obFadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes obDot1 {
+            from { transform: rotate(0deg) translateX(80px) rotate(0deg); }
+            to   { transform: rotate(360deg) translateX(80px) rotate(-360deg); }
+        }
+        @keyframes obDot2 {
+            from { transform: rotate(120deg) translateX(80px) rotate(-120deg); }
+            to   { transform: rotate(480deg) translateX(80px) rotate(-480deg); }
+        }
+        @keyframes obDot3 {
+            from { transform: rotate(0deg) translateX(58px) rotate(0deg); }
+            to   { transform: rotate(-360deg) translateX(58px) rotate(360deg); }
+        }
+        @keyframes obDot4 {
+            from { transform: rotate(180deg) translateX(58px) rotate(-180deg); }
+            to   { transform: rotate(-180deg) translateX(58px) rotate(180deg); }
+        }
+        @keyframes obDot5 {
+            from { transform: rotate(90deg) translateX(36px) rotate(-90deg); }
+            to   { transform: rotate(450deg) translateX(36px) rotate(-450deg); }
+        }
+        @keyframes obBreathe {
+            0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 0.85; }
+            50%      { transform: translate(-50%,-50%) scale(1.06); opacity: 1; }
+        }
+        @keyframes obIamPulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(255,255,255,0), 0 0 30px rgba(255,255,255,0.04);
+                border-color: rgba(255,255,255,0.25);
+            }
+            50% {
+                box-shadow: 0 0 0 12px rgba(255,255,255,0.03), 0 0 50px rgba(255,255,255,0.1);
+                border-color: rgba(255,255,255,0.5);
+            }
+        }
+        @keyframes obIamRingOuter {
+            0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 0.08; }
+            50%      { transform: translate(-50%,-50%) scale(1.08); opacity: 0.15; }
+        }
+        @keyframes obIamRingInner {
+            0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 0.05; }
+            50%      { transform: translate(-50%,-50%) scale(1.05); opacity: 0.12; }
+        }
+        @keyframes obS4dot1 {
+            from { transform: rotate(0deg) translateX(75px) rotate(0deg); }
+            to   { transform: rotate(360deg) translateX(75px) rotate(-360deg); }
+        }
+        @keyframes obS4dot2 {
+            from { transform: rotate(140deg) translateX(75px) rotate(-140deg); }
+            to   { transform: rotate(500deg) translateX(75px) rotate(-500deg); }
+        }
+        @keyframes obS4dot3 {
+            from { transform: rotate(60deg) translateX(55px) rotate(-60deg); }
+            to   { transform: rotate(-300deg) translateX(55px) rotate(300deg); }
+        }
+        @keyframes obS4dot4 {
+            from { transform: rotate(220deg) translateX(55px) rotate(-220deg); }
+            to   { transform: rotate(-140deg) translateX(55px) rotate(140deg); }
+        }
+        @keyframes obCheckDraw {
+            from { stroke-dashoffset: 30; }
+            to   { stroke-dashoffset: 0; }
+        }
+        @keyframes obLineExpand {
+            from { width: 0; }
+            to   { width: 40px; }
+        }
+
+        /* Container */
+        .ob-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            background: var(--ob-bg);
+            color: var(--ob-text);
+            font-family: var(--ob-sans);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .ob-overlay.ob-hidden { display: none; }
+
+        .ob-glow {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.04;
+            background-image: radial-gradient(circle at 50% 25%, rgba(255,255,255,0.1) 0%, transparent 55%);
+        }
+
+        .ob-slide-area {
+            flex: 1;
+            width: 100%;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 56px 28px 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ob-slide {
+            display: none;
+            text-align: center;
+            flex-direction: column;
+            align-items: center;
+        }
+        .ob-slide.ob-active { display: flex; }
+
+        /* Slide 1 */
+        .ob-s1 { gap: 28px; }
+        /* Slide 2 */
+        .ob-s2 { gap: 24px; }
+        /* Slide 3 */
+        .ob-s3 { gap: 22px; }
+        /* Slide 4 */
+        .ob-s4 { gap: 26px; }
+
+        /* Animated block helper */
+        .ob-a {
+            animation: obFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        /* Bottom controls */
+        .ob-bottom {
+            width: 100%;
+            max-width: 420px;
+            padding: 0 28px 36px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 22px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .ob-btn {
+            width: 100%;
+            padding: 18px 0;
+            border-radius: 100px;
+            background: #fff;
+            color: #0a0a0c;
+            border: none;
+            cursor: pointer;
+            font-family: var(--ob-sans);
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            transition: transform 0.2s ease;
+            animation: obFadeUp 0.6s ease 0.4s both;
+        }
+        .ob-btn:hover { transform: scale(1.02); }
+        .ob-btn:active { transform: scale(0.98); }
+
+        .ob-dots {
+            display: flex;
+            gap: 8px;
+            padding-bottom: 4px;
+        }
+
+        .ob-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255,255,255,0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        .ob-dot.ob-dot-active {
+            width: 24px;
+            background: #fff;
+        }
+
+        /* Typography */
+        .ob-subtitle {
+            font-family: var(--ob-sans);
+            font-size: 10px;
+            letter-spacing: 4px;
+            color: var(--ob-text-dim);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .ob-title {
+            font-family: var(--ob-serif);
+            font-weight: 400;
+            line-height: 1.2;
+            color: var(--ob-text);
+            white-space: pre-line;
+        }
+        .ob-title--lg { font-size: 34px; }
+        .ob-title--md { font-size: 32px; }
+        .ob-title--sm { font-size: 30px; }
+        .ob-para {
+            font-family: var(--ob-sans);
+            font-size: 15px;
+            line-height: 1.65;
+            color: var(--ob-text-mid);
+            font-weight: 300;
+            max-width: 320px;
+        }
+        .ob-para--sm { font-size: 14px; max-width: 310px; }
+        .ob-bold { color: var(--ob-text); font-weight: 600; }
+        .ob-bold-w { color: #fff; font-weight: 600; }
+
+        /* ── Slide 1: Orbital Rings ── */
+        .ob-orbits {
+            position: relative;
+            width: 180px;
+            height: 180px;
+        }
+        .ob-orbits svg {
+            position: absolute;
+            inset: 0;
+        }
+        .ob-orb-dot {
+            position: absolute;
+            top: 90px;
+            left: 90px;
+            width: 4px;
+            height: 4px;
+            margin-left: -2px;
+            margin-top: -2px;
+            border-radius: 50%;
+        }
+        .ob-orb-dot--1 { background: rgba(255,255,255,0.18); animation: obDot1 36s linear infinite; }
+        .ob-orb-dot--2 { background: rgba(255,255,255,0.22); animation: obDot2 36s linear infinite; }
+        .ob-orb-dot--3 { background: rgba(255,255,255,0.26); animation: obDot3 28s linear infinite; }
+        .ob-orb-dot--4 { background: rgba(255,255,255,0.30); animation: obDot4 28s linear infinite; }
+        .ob-orb-dot--5 { background: rgba(255,255,255,0.34); animation: obDot5 20s linear infinite; }
+
+        .ob-sphere {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #fff, #bbb 55%, #888);
+            box-shadow: 0 0 35px rgba(255,255,255,0.1);
+            animation: obBreathe 5s ease-in-out infinite;
+        }
+        .ob-community-label {
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 7.5px;
+            letter-spacing: 3px;
+            color: var(--ob-text-dim);
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        /* ── Slide 2: I → We visual ── */
+        .ob-iwe-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+        }
+        .ob-circle-i {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--ob-serif);
+            font-size: 22px;
+            color: var(--ob-text);
+        }
+        .ob-circle-we {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(255,255,255,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--ob-serif);
+            font-size: 32px;
+            font-style: italic;
+            color: #fff;
+            font-weight: 500;
+            box-shadow: 0 0 30px rgba(255,255,255,0.05);
+        }
+        .ob-arrow-inf {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--ob-text-dim);
+            font-size: 18px;
+            margin-left: 8px;
+        }
+        .ob-arrow-inf .ob-inf { font-size: 22px; }
+
+        .ob-divider-line {
+            width: 40px;
+            height: 1.5px;
+            background: rgba(255,255,255,0.12);
+            border-radius: 1px;
+            animation: obLineExpand 0.8s ease 0.4s both;
+            margin: 0 auto;
+        }
+
+        /* ── Slide 3: I AM ── */
+        .ob-iam-wrap {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ob-iam-ring-outer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 156px;
+            height: 156px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.06);
+            animation: obIamRingOuter 4s ease-in-out infinite;
+        }
+        .ob-iam-ring-inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 175px;
+            height: 175px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.04);
+            animation: obIamRingInner 4s ease-in-out 0.5s infinite;
+        }
+        .ob-iam-circle {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: obIamPulse 4s ease-in-out infinite;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.03) 0%, transparent 70%);
+        }
+        .ob-iam-text {
+            font-family: var(--ob-serif);
+            font-size: 32px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+
+        .ob-stats {
+            display: flex;
+            justify-content: center;
+            margin-top: 4px;
+        }
+        .ob-stat {
+            flex: 1;
+            text-align: center;
+            padding: 0 12px;
+        }
+        .ob-stat + .ob-stat {
+            border-left: 1px solid rgba(255,255,255,0.08);
+        }
+        .ob-stat-val {
+            font-family: var(--ob-serif);
+            font-size: 26px;
+            font-weight: 400;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+        .ob-stat-val--sm { font-size: 20px; }
+        .ob-stat-label {
+            font-size: 7px;
+            letter-spacing: 2px;
+            color: var(--ob-text-dim);
+            margin-top: 4px;
+            text-transform: uppercase;
+        }
+
+        /* ── Slide 4: Confirmation ── */
+        .ob-confirm-orbits {
+            position: relative;
+            width: 160px;
+            height: 160px;
+        }
+        .ob-confirm-orbits svg { position: absolute; inset: 0; }
+        .ob-s4-dot {
+            position: absolute;
+            top: 80px;
+            left: 80px;
+            width: 4px;
+            height: 4px;
+            margin-left: -2px;
+            margin-top: -2px;
+            border-radius: 50%;
+        }
+        .ob-s4-dot--1 { background: rgba(255,255,255,0.18); animation: obS4dot1 32s linear infinite; }
+        .ob-s4-dot--2 { background: rgba(255,255,255,0.23); animation: obS4dot2 32s linear infinite; }
+        .ob-s4-dot--3 { background: rgba(255,255,255,0.28); animation: obS4dot3 24s linear infinite; }
+        .ob-s4-dot--4 { background: rgba(255,255,255,0.33); animation: obS4dot4 24s linear infinite; }
+
+        .ob-checkmark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 45px rgba(255,255,255,0.12);
+        }
+        .ob-check-path {
+            stroke-dasharray: 30;
+            animation: obCheckDraw 0.6s ease 0.3s both;
+        }
+
+        .ob-confirm-sub {
+            font-size: 12px;
+            color: var(--ob-text-dim);
+            margin-top: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .ob-points {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            text-align: left;
+            width: 100%;
+            max-width: 320px;
+        }
+        .ob-point {
+            padding: 15px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+        .ob-point + .ob-point {
+            border-top: 1px solid var(--ob-divider);
+        }
+        .ob-point-marker {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.3);
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+        .ob-point-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--ob-text);
+            margin-bottom: 3px;
+        }
+        .ob-point-desc {
+            font-size: 13px;
+            line-height: 1.55;
+            color: var(--ob-text-dim);
+            font-weight: 300;
+        }
     </style>
 </head>
 <body>
+
+    <!-- ════════════════════════════════════════════════ -->
+    <!-- ONBOARDING OVERLAY                              -->
+    <!-- ════════════════════════════════════════════════ -->
+    <div class="ob-overlay" id="onboarding">
+        <div class="ob-glow"></div>
+
+        <!-- Slide content area -->
+        <div class="ob-slide-area" id="obSlideArea">
+
+            <!-- SLIDE 1: Welcome Home -->
+            <div class="ob-slide ob-s1 ob-active" id="obSlide0">
+                <div class="ob-a" style="animation-delay:0s">
+                    <div class="ob-orbits">
+                        <svg width="180" height="180" viewBox="0 0 180 180">
+                            <circle cx="90" cy="90" r="80" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+                            <circle cx="90" cy="90" r="58" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+                            <circle cx="90" cy="90" r="36" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+                        </svg>
+                        <div class="ob-orb-dot ob-orb-dot--1"></div>
+                        <div class="ob-orb-dot ob-orb-dot--2"></div>
+                        <div class="ob-orb-dot ob-orb-dot--3"></div>
+                        <div class="ob-orb-dot ob-orb-dot--4"></div>
+                        <div class="ob-orb-dot ob-orb-dot--5"></div>
+                        <div class="ob-sphere"></div>
+                        <div class="ob-community-label">iwe community</div>
+                    </div>
+                </div>
+                <div class="ob-a" style="animation-delay:0.12s">
+                    <div class="ob-subtitle">Welcome Home</div>
+                    <h1 class="ob-title ob-title--lg">Тебя пригласили.
+Ты здесь.</h1>
+                </div>
+                <div class="ob-a" style="animation-delay:0.25s">
+                    <p class="ob-para" style="max-width:300px">Это сообщество для тех, кто выбрал жить осознанно. Не случайно - по приглашению.</p>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: From I to We -->
+            <div class="ob-slide ob-s2" id="obSlide1">
+                <div class="ob-a" style="animation-delay:0s">
+                    <div class="ob-iwe-visual">
+                        <div class="ob-circle-i">I</div>
+                        <div class="ob-circle-we">We</div>
+                        <div class="ob-arrow-inf">
+                            <span>&rarr;</span>
+                            <span class="ob-inf">&infin;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ob-a" style="animation-delay:0.1s">
+                    <div class="ob-subtitle">From I to We</div>
+                    <h1 class="ob-title ob-title--md">Не объединение.
+Трансформация.</h1>
+                </div>
+                <div class="ob-a" style="animation-delay:0.2s">
+                    <div class="ob-divider-line"></div>
+                </div>
+                <div class="ob-a" style="animation-delay:0.25s">
+                    <p class="ob-para" style="line-height:1.7">Мир разделяет нас - политика, экономика, эго. iWe построен на обратном: <strong class="ob-bold">осознанное единство начинается внутри тебя.</strong></p>
+                </div>
+                <div class="ob-a" style="animation-delay:0.35s">
+                    <p class="ob-para" style="line-height:1.7">Когда учишься видеть себя ясно - начинаешь видеть других. Путь от <strong class="ob-bold-w">I</strong> к <strong class="ob-bold-w">We</strong> - это не расстояние. Это глубина.</p>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: I AM Button -->
+            <div class="ob-slide ob-s3" id="obSlide2">
+                <div class="ob-a" style="animation-delay:0s">
+                    <div class="ob-iam-wrap">
+                        <div class="ob-iam-ring-outer"></div>
+                        <div class="ob-iam-ring-inner"></div>
+                        <div class="ob-iam-circle">
+                            <span class="ob-iam-text">I AM</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ob-a" style="animation-delay:0.1s">
+                    <div class="ob-subtitle">Your moment of presence</div>
+                    <h1 class="ob-title ob-title--sm">Одно нажатие.
+Один момент.</h1>
+                </div>
+                <div class="ob-a" style="animation-delay:0.2s">
+                    <p class="ob-para ob-para--sm">Это не трекер задач. Это инструмент <strong class="ob-bold">возвращения к себе.</strong></p>
+                </div>
+                <div class="ob-a" style="animation-delay:0.3s">
+                    <p class="ob-para ob-para--sm">Нажми I AM - отметь момент присутствия. iWe измеряет не продуктивность, а <strong class="ob-bold-w">качество внимания.</strong></p>
+                </div>
+                <div class="ob-a" style="animation-delay:0.4s">
+                    <div class="ob-stats">
+                        <div class="ob-stat">
+                            <div class="ob-stat-val">1440</div>
+                            <div class="ob-stat-label">МИН / ДЕНЬ</div>
+                        </div>
+                        <div class="ob-stat">
+                            <div class="ob-stat-val ob-stat-val--sm">I AM</div>
+                            <div class="ob-stat-label">ТВОЙ ИНСТРУМЕНТ</div>
+                        </div>
+                        <div class="ob-stat">
+                            <div class="ob-stat-val">365</div>
+                            <div class="ob-stat-label">ДНЕЙ ВПЕРЕДИ</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 4: Confirmation -->
+            <div class="ob-slide ob-s4" id="obSlide3">
+                <div class="ob-a" style="animation-delay:0s">
+                    <div class="ob-confirm-orbits">
+                        <svg width="160" height="160" viewBox="0 0 160 160">
+                            <circle cx="80" cy="80" r="75" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+                            <circle cx="80" cy="80" r="55" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+                        </svg>
+                        <div class="ob-s4-dot ob-s4-dot--1"></div>
+                        <div class="ob-s4-dot ob-s4-dot--2"></div>
+                        <div class="ob-s4-dot ob-s4-dot--3"></div>
+                        <div class="ob-s4-dot ob-s4-dot--4"></div>
+                        <div class="ob-checkmark">
+                            <svg width="26" height="26" viewBox="0 0 28 28">
+                                <path class="ob-check-path" d="M6 14 L12 20 L22 8" fill="none" stroke="#0a0a0c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="ob-a" style="animation-delay:0.15s">
+                    <h1 class="ob-title ob-title--lg" style="line-height:1.25">Ты теперь<br>часть <em style="font-style:italic">iWe.</em></h1>
+                    <p class="ob-confirm-sub">Вход по приглашению &middot; Подписка как верификация</p>
+                </div>
+                <div class="ob-a" style="animation-delay:0.3s">
+                    <div class="ob-points">
+                        <div class="ob-point" style="animation:obFadeUp 0.5s ease 0.4s both">
+                            <div class="ob-point-marker"></div>
+                            <div>
+                                <div class="ob-point-title">Только качественное внимание</div>
+                                <div class="ob-point-desc">Не быть здесь просто так. Каждый момент - осознанный.</div>
+                            </div>
+                        </div>
+                        <div class="ob-point" style="animation:obFadeUp 0.5s ease 0.5s both">
+                            <div class="ob-point-marker"></div>
+                            <div>
+                                <div class="ob-point-title">I &rarr; We &rarr; World</div>
+                                <div class="ob-point-desc">Твой рост вносит вклад в целую экосистему.</div>
+                            </div>
+                        </div>
+                        <div class="ob-point" style="animation:obFadeUp 0.5s ease 0.6s both">
+                            <div class="ob-point-marker"></div>
+                            <div>
+                                <div class="ob-point-title">Тебя пригласили</div>
+                                <div class="ob-point-desc">Кто-то поручился за тебя. Цени это доверие.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom controls -->
+        <div class="ob-bottom">
+            <button class="ob-btn" id="obBtn">Начать &rarr;</button>
+            <div class="ob-dots" id="obDots">
+                <div class="ob-dot ob-dot-active" data-idx="0"></div>
+                <div class="ob-dot" data-idx="1"></div>
+                <div class="ob-dot" data-idx="2"></div>
+                <div class="ob-dot" data-idx="3"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- TOPBAR -->
     <div class="topbar">
@@ -1499,6 +2163,109 @@
     <div class="toast" id="toastEl"></div>
 
     <script>
+    // ════════════════════════════════════════════════
+    // ONBOARDING LOGIC
+    // ════════════════════════════════════════════════
+    (function() {
+        var obOverlay = document.getElementById('onboarding');
+
+        // Check if onboarding was already completed
+        if (localStorage.getItem('iwe_onboarding_completed') === 'true') {
+            obOverlay.classList.add('ob-hidden');
+            return;
+        }
+
+        var obCurrent = 0;
+        var obAnimKey = 0;
+        var obTouchStart = null;
+        var obBtn = document.getElementById('obBtn');
+        var obSlideArea = document.getElementById('obSlideArea');
+        var obDotEls = document.querySelectorAll('.ob-dot');
+        var obBtnLabels = ['Начать \u2192', 'Дальше \u2192', 'Понятно \u2192', 'Войти в iWe \u2192'];
+
+        function obGoTo(idx) {
+            if (idx < 0 || idx > 3 || idx === obCurrent) return;
+            // Hide current slide
+            document.getElementById('obSlide' + obCurrent).classList.remove('ob-active');
+            obCurrent = idx;
+            obAnimKey++;
+
+            // Show new slide — re-trigger animations by cloning
+            var slide = document.getElementById('obSlide' + obCurrent);
+            var parent = slide.parentNode;
+            var clone = slide.cloneNode(true);
+            clone.classList.add('ob-active');
+            parent.replaceChild(clone, slide);
+
+            // Update button label
+            obBtn.textContent = obBtnLabels[obCurrent];
+
+            // Update dots
+            obDotEls.forEach(function(d, i) {
+                d.classList.toggle('ob-dot-active', i === obCurrent);
+            });
+        }
+
+        function obNext() { obGoTo(obCurrent + 1); }
+        function obPrev() { obGoTo(obCurrent - 1); }
+
+        function obComplete() {
+            localStorage.setItem('iwe_onboarding_completed', 'true');
+            obOverlay.classList.add('ob-hidden');
+            document.body.style.overflow = '';
+            // Trigger reveal for main page elements
+            setTimeout(function() { reveal(); }, 100);
+        }
+
+        // Button click
+        obBtn.addEventListener('click', function() {
+            if (obCurrent < 3) {
+                obNext();
+            } else {
+                obComplete();
+            }
+        });
+
+        // Dot clicks
+        obDotEls.forEach(function(dot) {
+            dot.addEventListener('click', function() {
+                obGoTo(parseInt(dot.getAttribute('data-idx')));
+            });
+        });
+
+        // Swipe handling
+        obOverlay.addEventListener('touchstart', function(e) {
+            obTouchStart = e.touches[0].clientX;
+        }, { passive: true });
+
+        obOverlay.addEventListener('touchend', function(e) {
+            if (obTouchStart === null) return;
+            var diff = obTouchStart - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) obNext();
+                else obPrev();
+            }
+            obTouchStart = null;
+        }, { passive: true });
+
+        // Keyboard handling
+        window.addEventListener('keydown', function(e) {
+            if (obOverlay.classList.contains('ob-hidden')) return;
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                if (obCurrent < 3) obNext();
+                else obComplete();
+            }
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                obPrev();
+            }
+        });
+
+        // Prevent body scroll while onboarding is visible
+        document.body.style.overflow = 'hidden';
+    })();
+
     // ── DATA ──
     const profiles = [
         { av:'🦁', name:'@brand_luxury', niche:'Люкс · личный бренд', slot:'#021', v:'1.2М', s:'+6.8К', d:'31', pct:'100%', bw:'100%', bc:'linear-gradient(90deg,#c8a84b,#2ecc71)', quote:'«На 12-й день пошёл первый вирусный ролик — 280к просмотров за ночь»' },
