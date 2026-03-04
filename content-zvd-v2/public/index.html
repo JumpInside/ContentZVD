@@ -435,6 +435,217 @@
             font-weight: bold;
             filter: drop-shadow(0 0 4px rgba(0, 255, 65, 0.6));
         }
+        /* PRICING SECTION STYLES */
+        .pkg {
+            position: relative;
+            background: rgba(5, 5, 10, 0.75);
+            border: 1px solid rgba(0, 255, 65, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: clamp(20px, 5vw, 32px);
+        }
+        .pkg:hover {
+            transform: translateY(-4px);
+        }
+        .pkg--profi {
+            border-color: rgba(0, 255, 65, 0.2);
+        }
+        .pkg--profi:hover {
+            border-color: rgba(0, 255, 65, 0.4);
+            box-shadow: 0 10px 40px rgba(0, 255, 65, 0.08);
+        }
+        .pkg--expert {
+            border-color: rgba(0, 240, 255, 0.4);
+            border-top: 3px solid;
+            border-image: linear-gradient(90deg, #00F0FF, #8b5cf6, #00F0FF) 1;
+            border-image-slice: 1;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.08);
+        }
+        .pkg--expert:hover {
+            border-color: rgba(0, 240, 255, 0.7);
+            box-shadow: 0 10px 40px rgba(0, 240, 255, 0.15), 0 0 30px rgba(0, 240, 255, 0.1);
+        }
+        .badge-popular {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255, 0, 85, 0.15);
+            border: 1px solid rgba(255, 0, 85, 0.5);
+            color: #FF0055;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 6px;
+            animation: badgePulse 2s ease-in-out infinite;
+        }
+        @keyframes badgePulse {
+            0%, 100% { box-shadow: 0 0 8px rgba(255, 0, 85, 0.3); }
+            50% { box-shadow: 0 0 18px rgba(255, 0, 85, 0.6); }
+        }
+        .badge-expert-only {
+            display: inline-block;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            color: #00F0FF;
+            font-size: 7px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 2px 6px;
+            border-radius: 4px;
+            vertical-align: middle;
+            margin-left: 4px;
+        }
+        .pkg-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 6px 0;
+            font-size: clamp(12px, 3.2vw, 14px);
+            line-height: 1.5;
+        }
+        .pkg-feature .icon-check {
+            flex-shrink: 0;
+            width: 18px;
+            height: 18px;
+            color: #00FF41;
+            filter: drop-shadow(0 0 4px rgba(0, 255, 65, 0.6));
+            margin-top: 2px;
+        }
+        .pkg-feature .icon-star {
+            flex-shrink: 0;
+            width: 18px;
+            height: 18px;
+            color: #00F0FF;
+            filter: drop-shadow(0 0 4px rgba(0, 240, 255, 0.6));
+            margin-top: 2px;
+        }
+        .pkg-feature .icon-x {
+            flex-shrink: 0;
+            width: 18px;
+            height: 18px;
+            color: rgba(255, 255, 255, 0.2);
+            margin-top: 2px;
+        }
+        .pkg-feature--disabled {
+            opacity: 0.35;
+        }
+        .btn-pkg-outline {
+            display: block;
+            width: 100%;
+            padding: 14px 20px;
+            border: 1px solid rgba(0, 255, 65, 0.4);
+            border-radius: 12px;
+            color: #00FF41;
+            font-weight: 800;
+            font-size: clamp(13px, 3.5vw, 15px);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-align: center;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-pkg-outline:hover {
+            background: rgba(0, 255, 65, 0.1);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.15);
+            border-color: rgba(0, 255, 65, 0.7);
+        }
+        .btn-pkg-filled {
+            display: block;
+            width: 100%;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #00F0FF, #8b5cf6);
+            color: #000;
+            font-weight: 900;
+            font-size: clamp(13px, 3.5vw, 15px);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-pkg-filled:hover {
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+            filter: brightness(1.1);
+        }
+        .divider-or {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 0;
+        }
+        .divider-or::before,
+        .divider-or::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        }
+        .divider-or span {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+        /* Compare Table */
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: clamp(11px, 3vw, 13px);
+        }
+        .compare-table th {
+            padding: 10px 8px;
+            text-align: center;
+            font-weight: 800;
+            font-size: clamp(11px, 3vw, 13px);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .compare-table th:first-child {
+            text-align: left;
+        }
+        .compare-table th.col-expert {
+            color: #00F0FF;
+            background: rgba(0, 240, 255, 0.03);
+        }
+        .compare-table th.col-profi {
+            color: #00FF41;
+        }
+        .compare-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .compare-table td:first-child {
+            text-align: left;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .compare-table td.col-expert {
+            background: rgba(0, 240, 255, 0.02);
+        }
+        .compare-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .compare-table tr:hover td.col-expert {
+            background: rgba(0, 240, 255, 0.04);
+        }
+        .guarantee-block {
+            background: rgba(0, 255, 65, 0.04);
+            border: 1px solid rgba(0, 255, 65, 0.15);
+            border-radius: 12px;
+            padding: clamp(16px, 4vw, 24px);
+        }
         /* Animated Elements - Cascade on Load */
         .section-animated-element {
             animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -1004,6 +1215,216 @@
                 </div>
             </div>
         </section>
+
+        <!-- ===== PRICING SECTION ===== -->
+        <section id="s-pricing" class="relative w-full px-4 sm:px-6 md:px-12 py-20 md:py-28 max-w-[1440px] mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-12">
+                <div class="section-animated-element inline-flex items-center gap-3 px-6 py-2 border border-matrix-DEFAULT/50 bg-matrix-dark/20 backdrop-blur-md mb-6 shadow-[0_0_20px_rgba(0,255,65,0.1)]">
+                    <span class="text-lg tracking-[0.2em] text-matrix-DEFAULT uppercase font-black text-glow-matrix">
+                        > ТАРИФИ_
+                    </span>
+                </div>
+                <h2 class="section-animated-element text-3xl md:text-5xl font-black text-white mb-4" style="animation-delay: 0.2s;">
+                    Обери свій <span class="text-matrix-DEFAULT text-glow-matrix">пакет</span>
+                </h2>
+                <p class="section-animated-element text-base md:text-lg text-gray-400 max-w-2xl mx-auto" style="animation-delay: 0.3s;">
+                    Два рівні сервісу — один результат: мільйонні охоплення
+                </p>
+            </div>
+
+            <!-- Package Cards -->
+            <div class="max-w-4xl mx-auto">
+
+                <!-- PACKAGE 1: Профі -->
+                <div class="section-animated-element pkg pkg--profi" style="animation-delay: 0.4s;">
+                    <div class="mb-5">
+                        <div class="flex items-baseline gap-3 mb-2">
+                            <h3 class="text-xl md:text-2xl font-black text-white">Профі</h3>
+                            <span class="text-2xl md:text-3xl font-black text-matrix-DEFAULT text-glow-matrix">$500<span class="text-sm text-gray-500 font-bold">/міс</span></span>
+                        </div>
+                        <p class="text-sm text-gray-400 leading-relaxed">Контент-конвеєр під ключ. Ми робимо — ти публікуєш. Стабільний ріст та вихід на мільйонні охоплення.</p>
+                    </div>
+
+                    <!-- Included -->
+                    <div class="space-y-1 mb-5">
+                        <div class="pkg-feature">
+                            <iconify-icon icon="lucide:check" class="icon-check"></iconify-icon>
+                            <span class="text-white/80">3–5 Reels щодня (кількість затверджуємо з клієнтом)</span>
+                        </div>
+                        <div class="pkg-feature">
+                            <iconify-icon icon="lucide:check" class="icon-check"></iconify-icon>
+                            <span class="text-white/80">Клієнт обирає теми — ми шукаємо відео та монтуємо під ключ</span>
+                        </div>
+                        <div class="pkg-feature">
+                            <iconify-icon icon="lucide:check" class="icon-check"></iconify-icon>
+                            <span class="text-white/80">Клієнт записує реакції або дає відео продукту (можна і те, і те)</span>
+                        </div>
+                        <div class="pkg-feature">
+                            <iconify-icon icon="lucide:check" class="icon-check"></iconify-icon>
+                            <span class="text-white/80">Додаємо офери на відео, якщо потрібно</span>
+                        </div>
+                        <div class="pkg-feature">
+                            <iconify-icon icon="lucide:check" class="icon-check"></iconify-icon>
+                            <span class="text-white/80">Підбір актуальних форматів</span>
+                        </div>
+                        <div class="pkg-feature">
+                            <iconify-icon icon="lucide:check" class="icon-check"></iconify-icon>
+                            <span class="text-white/80">Можемо замість клієнта викладати контент</span>
+                        </div>
+                        <div class="pkg-feature">
+                            <iconify-icon icon="lucide:check" class="icon-check"></iconify-icon>
+                            <span class="text-white/80">Повна прозора аналітика контенту</span>
+                        </div>
+                    </div>
+
+                    <!-- Not Included -->
+                    <div class="space-y-1 mb-6 pt-4 border-t border-white/5">
+                        <div class="pkg-feature pkg-feature--disabled">
+                            <iconify-icon icon="lucide:x" class="icon-x"></iconify-icon>
+                            <span>Стратегічна сесія та інтеграція продукту</span>
+                        </div>
+                        <div class="pkg-feature pkg-feature--disabled">
+                            <iconify-icon icon="lucide:x" class="icon-x"></iconify-icon>
+                            <span>Персональний проджект-менеджер</span>
+                        </div>
+                        <div class="pkg-feature pkg-feature--disabled">
+                            <iconify-icon icon="lucide:x" class="icon-x"></iconify-icon>
+                            <span>Контент під вузьку нішу діяльності</span>
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="openBookingModal('profi')" class="btn-pkg-outline">
+                        Обрати Профі · $500
+                    </button>
+                </div>
+
+                <!-- Divider -->
+                <div class="divider-or section-animated-element" style="animation-delay: 0.5s;">
+                    <span>або</span>
+                </div>
+
+                <!-- PACKAGE 2: Експерт (Recommended) -->
+                <div class="section-animated-element pkg pkg--expert" style="animation-delay: 0.6s;">
+                    <span class="badge-popular">Обирають 70%</span>
+
+                    <div class="mb-5 mt-2">
+                        <div class="flex items-baseline gap-3 mb-2">
+                            <h3 class="text-xl md:text-2xl font-black text-white">Експерт</h3>
+                            <span class="text-2xl md:text-3xl font-black text-neon-blue" style="text-shadow: 0 0 10px rgba(0,240,255,0.6);">$990<span class="text-sm text-gray-500 font-bold">/міс</span></span>
+                        </div>
+                        <p class="text-sm text-gray-400 leading-relaxed">Стратегічний партнер для твого бренду. Ми не просто робимо контент — ми будуємо систему, яка продає.</p>
+                    </div>
+
+                    <!-- Included -->
+                    <div class="space-y-1 mb-6">
+                        <div class="pkg-feature">
+                            <iconify-icon icon="lucide:star" class="icon-star"></iconify-icon>
+                            <span class="text-white/80">Все з Профі — 3–5 Reels, монтаж, публікація, аналітика</span>
+                        </div>
+                        <div class="pkg-feature">
+                            <iconify-icon icon="lucide:star" class="icon-star"></iconify-icon>
+                            <span class="text-white/80">Стратегічна сесія — будуємо план інтеграції продукту клієнта в кожне відео <span class="badge-expert-only">Тільки Експерт</span></span>
+                        </div>
+                        <div class="pkg-feature">
+                            <iconify-icon icon="lucide:star" class="icon-star"></iconify-icon>
+                            <span class="text-white/80">Контент під вузьку нішу — адвокат? Шукаємо відео про сімейні справи. Фітнес-тренер? Контент про спортзал та вагу <span class="badge-expert-only">Тільки Експерт</span></span>
+                        </div>
+                        <div class="pkg-feature">
+                            <iconify-icon icon="lucide:star" class="icon-star"></iconify-icon>
+                            <span class="text-white/80">Персональний проджект-менеджер — контролює всю роботу, реалізує корективи миттєво <span class="badge-expert-only">Тільки Експерт</span></span>
+                        </div>
+                        <div class="pkg-feature">
+                            <iconify-icon icon="lucide:star" class="icon-star"></iconify-icon>
+                            <span class="text-white/80">Інтеграція продукту та оферів стратегічно в контент</span>
+                        </div>
+                        <div class="pkg-feature">
+                            <iconify-icon icon="lucide:star" class="icon-star"></iconify-icon>
+                            <span class="text-white/80">Пріоритетна черга на правки</span>
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="openBookingModal('expert')" class="btn-pkg-filled">
+                        Обрати Експерт · $990
+                    </button>
+                </div>
+            </div>
+
+            <!-- Comparison Table -->
+            <div class="section-animated-element max-w-4xl mx-auto mt-14 bg-black/40 border border-white/5 rounded-2xl p-4 md:p-6 backdrop-blur-md overflow-x-auto" style="animation-delay: 0.7s;">
+                <h3 class="text-base md:text-lg font-black text-white mb-4 tracking-wide uppercase">Порівняння пакетів</h3>
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th class="text-left text-gray-400">Що входить</th>
+                            <th class="col-profi">Профі</th>
+                            <th class="col-expert">Експерт</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Reels щодня</td>
+                            <td>3–5</td>
+                            <td class="col-expert" style="color: #00F0FF; font-weight: 700;">3–5</td>
+                        </tr>
+                        <tr>
+                            <td>Пошук відео</td>
+                            <td style="color: #00FF41;">✓</td>
+                            <td class="col-expert" style="color: #00FF41;">✓</td>
+                        </tr>
+                        <tr>
+                            <td>Монтаж під ключ</td>
+                            <td style="color: #00FF41;">✓</td>
+                            <td class="col-expert" style="color: #00FF41;">✓</td>
+                        </tr>
+                        <tr>
+                            <td>Публікація за тебе</td>
+                            <td style="color: #00FF41;">✓</td>
+                            <td class="col-expert" style="color: #00FF41;">✓</td>
+                        </tr>
+                        <tr>
+                            <td>Аналітика контенту</td>
+                            <td style="color: #00FF41;">✓</td>
+                            <td class="col-expert" style="color: #00FF41;">✓</td>
+                        </tr>
+                        <tr>
+                            <td>Офери на відео</td>
+                            <td style="color: #00FF41;">✓</td>
+                            <td class="col-expert" style="color: #00F0FF; font-weight: 700;">★ стратегічно</td>
+                        </tr>
+                        <tr>
+                            <td>Контент під нішу</td>
+                            <td style="color: rgba(255,255,255,0.2);">—</td>
+                            <td class="col-expert" style="color: #00FF41;">✓</td>
+                        </tr>
+                        <tr>
+                            <td>Стратегічна сесія</td>
+                            <td style="color: rgba(255,255,255,0.2);">—</td>
+                            <td class="col-expert" style="color: #00FF41;">✓</td>
+                        </tr>
+                        <tr>
+                            <td>Персональний проджект</td>
+                            <td style="color: rgba(255,255,255,0.2);">—</td>
+                            <td class="col-expert" style="color: #00FF41;">✓</td>
+                        </tr>
+                        <tr>
+                            <td>Пріоритетна черга</td>
+                            <td style="color: rgba(255,255,255,0.2);">—</td>
+                            <td class="col-expert" style="color: #00FF41;">✓</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Guarantee Block -->
+            <div class="section-animated-element max-w-4xl mx-auto mt-8 guarantee-block flex items-start gap-4" style="animation-delay: 0.8s;">
+                <span class="text-3xl flex-shrink-0 mt-0.5">🛡</span>
+                <p class="text-sm md:text-base text-gray-300 leading-relaxed">
+                    <span class="text-white font-bold">Обидва пакети</span> — гарантія <span class="text-matrix-DEFAULT font-bold text-glow-matrix">1 000 000 переглядів</span> за 30 днів. Не досягли? Наступний місяць — <span class="text-matrix-DEFAULT font-bold">безкоштовно.</span>
+                </p>
+            </div>
+        </section>
+
     </main>
 
     <!-- ===== BOOKING MODAL ===== -->
@@ -1017,7 +1438,7 @@
                 <iconify-icon icon="lucide:x" width="20" height="20"></iconify-icon>
             </button>
             <!-- Header -->
-            <div class="mb-8 text-center">
+            <div class="mb-6 text-center">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 border border-matrix-DEFAULT/40 bg-matrix-dark/20 rounded-sm mb-4">
                     <span class="w-2 h-2 rounded-full bg-matrix-DEFAULT shadow-[0_0_8px_#00FF41] animate-pulse-fast"></span>
                     <span class="text-xs tracking-[0.2em] text-matrix-DEFAULT uppercase font-bold">Бронювання</span>
@@ -1025,6 +1446,18 @@
                 <h3 class="text-2xl md:text-3xl font-black text-white tracking-tight">Залишити заявку</h3>
                 <p class="text-gray-400 text-sm mt-2">Заповніть форму і ми зв'яжемося з вами</p>
             </div>
+            <!-- Plan Selector -->
+            <div id="plan-row" class="flex gap-3 mb-6">
+                <button type="button" onclick="selectPlan('profi')" id="plan-btn-profi"
+                    class="flex-1 py-3 rounded-xl border text-sm font-bold tracking-wider uppercase text-center transition-all duration-300 border-matrix-DEFAULT/30 text-matrix-DEFAULT/60 bg-transparent">
+                    Профі · $500
+                </button>
+                <button type="button" onclick="selectPlan('expert')" id="plan-btn-expert"
+                    class="flex-1 py-3 rounded-xl border text-sm font-bold tracking-wider uppercase text-center transition-all duration-300 border-neon-blue/30 text-neon-blue/60 bg-transparent">
+                    Експерт · $990
+                </button>
+            </div>
+            <input type="hidden" id="field-plan" name="plan" value="">
             <!-- Form -->
             <form id="booking-form" class="flex flex-col gap-5" onsubmit="return submitBooking(event)">
                 <!-- Name -->
@@ -1234,7 +1667,22 @@
         // --- Booking Modal ---
         const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/REPLACE_WITH_YOUR_DEPLOYMENT_ID/exec';
 
-        function openBookingModal() {
+        function selectPlan(plan) {
+            document.getElementById('field-plan').value = plan;
+            const btnProfi = document.getElementById('plan-btn-profi');
+            const btnExpert = document.getElementById('plan-btn-expert');
+            // Reset both
+            btnProfi.className = 'flex-1 py-3 rounded-xl border text-sm font-bold tracking-wider uppercase text-center transition-all duration-300 border-matrix-DEFAULT/30 text-matrix-DEFAULT/60 bg-transparent';
+            btnExpert.className = 'flex-1 py-3 rounded-xl border text-sm font-bold tracking-wider uppercase text-center transition-all duration-300 border-neon-blue/30 text-neon-blue/60 bg-transparent';
+            if (plan === 'profi') {
+                btnProfi.className = 'flex-1 py-3 rounded-xl border text-sm font-bold tracking-wider uppercase text-center transition-all duration-300 border-matrix-DEFAULT bg-matrix-DEFAULT/15 text-matrix-DEFAULT shadow-[0_0_15px_rgba(0,255,65,0.15)]';
+            } else if (plan === 'expert') {
+                btnExpert.className = 'flex-1 py-3 rounded-xl border text-sm font-bold tracking-wider uppercase text-center transition-all duration-300 border-neon-blue bg-neon-blue/15 text-neon-blue shadow-[0_0_15px_rgba(0,240,255,0.15)]';
+            }
+        }
+
+        function openBookingModal(plan) {
+            if (plan) selectPlan(plan);
             const modal = document.getElementById('booking-modal');
             const card = document.getElementById('modal-card');
             modal.classList.remove('hidden');
@@ -1259,6 +1707,9 @@
                 document.getElementById('booking-form').reset();
                 document.getElementById('form-submit-btn').disabled = false;
                 document.getElementById('form-submit-btn').textContent = 'Відправити заявку';
+                document.getElementById('form-submit-btn').classList.remove('hidden');
+                document.getElementById('field-plan').value = '';
+                selectPlan('');
             }, 300);
         }
         function submitBooking(e) {
@@ -1266,6 +1717,7 @@
             const name = document.getElementById('field-name').value.trim();
             const phone = document.getElementById('field-phone').value.trim();
             const instagram = document.getElementById('field-instagram').value.trim();
+            const plan = document.getElementById('field-plan').value;
             const errorEl = document.getElementById('form-error');
             const successEl = document.getElementById('form-success');
             const submitBtn = document.getElementById('form-submit-btn');
@@ -1289,6 +1741,7 @@
                     name: name,
                     phone: phone,
                     instagram: instagram,
+                    plan: plan || 'не обрано',
                     timestamp: new Date().toISOString()
                 })
             }).then(() => {
